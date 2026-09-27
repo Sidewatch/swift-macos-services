@@ -15,8 +15,10 @@ import UserNotifications
 /// every failure path — authorisation denied, or a process with no bundle identity (a bare
 /// binary), where the notification center raises an exception that cannot be caught.
 public struct SystemNotificationPoster: NotificationPosting {
+    /// A poster over the shared notification center.
     public init() {}
 
+    /// Asks for authorisation (the system remembers the answer), then adds the request.
     public func post(_ notice: Notice) {
         guard Bundle.main.bundleIdentifier != nil else { return }
         let center = UNUserNotificationCenter.current()

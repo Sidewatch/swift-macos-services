@@ -16,11 +16,13 @@ public final class RecordingNotificationPoster: NotificationPosting, @unchecked 
     private let lock = NSLock()
     private var notices: [Notice] = []
 
+    /// An empty recorder.
     public init() {}
 
     /// Everything posted so far, oldest first.
     public var posted: [Notice] { lock.lock(); defer { lock.unlock() }; return notices }
 
+    /// Records `notice`; nothing is shown.
     public func post(_ notice: Notice) { lock.lock(); notices.append(notice); lock.unlock() }
 
     /// Forgets what was posted.
