@@ -9,11 +9,12 @@ let package = Package(
         .library(name: "NotificationPoster", targets: ["NotificationPoster"]),
     ],
     dependencies: [
-        .package(path: "../swift-foundation-extensions"),
+        .package(path: "../swift-foundation-extensions")
     ],
     targets: [
-        .target(name: "AppExtensions", dependencies: [.product(name: "ProcessRunner", package: "swift-foundation-extensions")],
-                swiftSettings: [.swiftLanguageMode(.v6)]),
+        .target(
+            name: "AppExtensions", dependencies: [.product(name: "ProcessRunner", package: "swift-foundation-extensions")],
+            swiftSettings: [.swiftLanguageMode(.v6)]),
         .target(name: "NotificationPoster", swiftSettings: [.swiftLanguageMode(.v6)]),
         .testTarget(name: "AppExtensionsTests", dependencies: ["AppExtensions"]),
         .testTarget(name: "NotificationPosterTests", dependencies: ["NotificationPoster"], swiftSettings: [.swiftLanguageMode(.v6)]),
