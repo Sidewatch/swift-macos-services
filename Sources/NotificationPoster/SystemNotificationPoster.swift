@@ -24,7 +24,8 @@ public struct SystemNotificationPoster: NotificationPosting {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
             guard granted else { return }
-            center.add(Self.request(for: notice), withCompletionHandler: nil)
+            // The shared center is fetched again here, not captured: it is not Sendable.
+            UNUserNotificationCenter.current().add(Self.request(for: notice), withCompletionHandler: nil)
         }
     }
 
