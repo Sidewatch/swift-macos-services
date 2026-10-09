@@ -13,6 +13,7 @@ Small wrappers over macOS system services an app talks to: an app extension's on
 
 ## NotificationPoster — `Sources/NotificationPoster`
 
+- Flat: Notice (the model), NotificationPosting (the protocol), SystemNotificationPoster (`UNUserNotificationCenter`; every title and body goes through NoticeText), RecordingNotificationPoster (the test double), NoticeText (text fit to show: C0/C1 controls and the Unicode bidi/format controls removed, title ≤ 256 and body ≤ 2,000 characters). A host that shows a program's own words — an OSC 777 notification, a prompt read off a screen — sanitises them with NoticeText before it builds the Notice too, so a recording double sees what the screen would.
 
 
 ## Rules

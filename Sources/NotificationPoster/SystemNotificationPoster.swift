@@ -29,11 +29,12 @@ public struct SystemNotificationPoster: NotificationPosting {
         }
     }
 
-    /// The request `post` hands the notification center.
+    /// The request `post` hands the notification center: the notice's text through ``NoticeText``,
+    /// so a program's own words reach the screen without its control characters.
     static func request(for notice: Notice) -> UNNotificationRequest {
         let content = UNMutableNotificationContent()
-        content.title = notice.title
-        content.body = notice.body
+        content.title = NoticeText.title(notice.title)
+        content.body = NoticeText.body(notice.body)
         if notice.playsSound { content.sound = .default }
         return UNNotificationRequest(identifier: notice.identifier, content: content, trigger: nil)
     }
