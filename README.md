@@ -1,6 +1,6 @@
 # Swift macOS Services
 
-Small wrappers over macOS system services an app talks to: an app extension's on/off state through pluginkit, and notifications behind a protocol.
+Small wrappers over macOS system services an app talks to: an app extension's on/off state through pluginkit, notifications behind a protocol, and facts about running processes.
 
 ## Modules
 
@@ -10,6 +10,7 @@ Each module is its own library product: depend on the package, then only on the 
 |---|---|
 | [`AppExtensions`](Docs/Modules/AppExtensions.md) | An app extension's on/off state for this user, read and flipped through `pluginkit`. |
 | [`NotificationPoster`](Docs/Modules/NotificationPoster.md) | macOS notifications behind a protocol, so the logic deciding when to notify can be tested. |
+| [`ProcessFacts`](Docs/Modules/ProcessFacts.md) | A process's name, path, argv, working directory, parent, descendants and listening TCP ports, read from the kernel. |
 
 ## Requirements
 
@@ -40,6 +41,10 @@ See [Docs/Modules/AppExtensions.md](Docs/Modules/AppExtensions.md).
 ### NotificationPoster
 
 See [Docs/Modules/NotificationPoster.md](Docs/Modules/NotificationPoster.md).
+
+### ProcessFacts
+
+See [Docs/Modules/ProcessFacts.md](Docs/Modules/ProcessFacts.md).
 
 Each module's full guide is `Docs/Modules/<Module>.md`.
 
