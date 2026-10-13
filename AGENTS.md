@@ -18,4 +18,6 @@ Small wrappers over macOS system services an app talks to: an app extension's on
 
 ## Rules
 
-Read `CONTRIBUTING.md` before changing anything: it is the layout and PR rulebook for this package.
+Read `CONTRIBUTING.md` for the folder layout and the pull-request rules.
+
+@CONTRIBUTING.md
