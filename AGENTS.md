@@ -22,7 +22,7 @@ Small wrappers over macOS system services an app talks to: an app extension's on
 
 ## ProcessFacts — `Sources/ProcessFacts`
 
-- `Models/` — ListeningPort. `Core/` — ProcessFacts (identity: name, path, argv, cwd, parent), +Tree (`descendants(of:)`), +Ports (`listeningPorts(_:)`). All `libproc`/`sysctl`, never a spawned tool; tests run against real child processes and real sockets.
+- `Models/` — ListeningPort, ListeningProcess. `Core/` — ProcessFacts (identity: name, path, argv, cwd, parent), +Tree (`descendants(of:)`), +Ports (`listeningPorts(_:)`), +Servers (`listeningProcesses(under:)`: one process per port, the earlier root first, by port; `shortCommand`). All `libproc`/`sysctl`, never a spawned tool; tests run against real child processes and real sockets.
 
 ## Rules
 

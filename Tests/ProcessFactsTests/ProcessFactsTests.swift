@@ -120,4 +120,25 @@ final class ProcessFactsTests: XCTestCase {
         XCTAssertEqual(port.pid, server.processIdentifier)
         XCTAssertEqual(ProcessFacts.name(port.pid), "nc")
     }
+
+    // MARK: Servers
+
+    func testServersUnderRootsAreFoundOncePerPortInPortOrder() throws {
+        let sockets = try (0..<6).map { _ in try socket("127.0.0.1") }
+        let ports = Set(sockets.map(\.port))
+        let parent = getppid()
+        let grandparent = try XCTUnwrap(ProcessFacts.parent(parent))
+        // Both roots hold this process: the FIRST root keeps each port.
+        let found = ProcessFacts.listeningProcesses(under: [parent, grandparent]).filter { ports.contains($0.port) }
+        XCTAssertEqual(found.map(\.port), ports.sorted(), "each port once, by port")
+        XCTAssertTrue(found.allSatisfy { $0.pid == getpid() && $0.root == parent && !$0.arguments.isEmpty }, "the first root keeps it")
+        XCTAssertTrue(
+            ProcessFacts.listeningProcesses(under: [getpid()]).filter { ports.contains($0.port) }.isEmpty,
+            "a root is not its own descendant")
+    }
+
+    func testAServersShortCommandIsItsFirstWordsWithoutPaths() {
+        let server = ListeningProcess(port: 5173, pid: 1, arguments: ["node", "/repo/node_modules/.bin/vite", "--port", "5173"], root: 1)
+        XCTAssertEqual(server.shortCommand, "node vite --port")
+    }
 }
